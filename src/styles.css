@@ -1,1 +1,13 @@
 /* You can add global styles to this file, and also import other style files */
+.soso-header{
+  display: inline-block;
+  height: 55px;
+  width: 100%;
+  border-bottom: 1px solid black;
+  position: fixed;
+  background-color: white;
+}
+
+.soso-logo{
+
+}

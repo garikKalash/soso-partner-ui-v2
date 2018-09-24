@@ -1,0 +1,14 @@
+<div>
+  <div *ngIf="wrongWrotenData"><p translate>invalidpasswordorphone</p></div>
+  <div class="ui-inputgroup">
+    <span class="ui-inputgroup-addon"><i class="fas fa-mobile-alt"></i></span>
+    <input type="text" pInputText [(ngModel)]="partner.telephone" placeholder="{{'Telephone' | translate}}">
+  </div>
+  <div class="ui-inputgroup">
+    <span class="ui-inputgroup-addon"><i class="fas fa-key"></i></span>
+    <input type="password" pPassword [(ngModel)]="partner.password" placeholder="{{'Password' | translate}}"/>
+  </div>
+  <div>
+    <button pButton type="button" label="{{'Sign In' | translate}}"  class="ui-button-secondary" (click)="signin()"></button>
+  </div>
+</div>

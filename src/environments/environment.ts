@@ -3,7 +3,10 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-  production: false
+  production: false,
+  partnerServiceBaseUrl: 'http://localhost:8081/',
+  clientServiceBaseUrl: 'http://localhost:8080/',
+  commonServiceBaseUrl: 'http://localhost:8001/',
 };
 
 /*
