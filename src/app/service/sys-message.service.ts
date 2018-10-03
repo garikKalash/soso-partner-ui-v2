@@ -5,13 +5,13 @@ import {Injectable} from '@angular/core';
 import {Observable} from 'rxjs';
 
 @Injectable()
-export class MessageService {
+export class SysMessageService {
   baseUrl = environment.commonServiceBaseUrl;
 
   constructor(private http: HttpClient) {
   }
 
-  public getAllMessages(): Observable<Message[]> {
+  public getAllSysMessages(): Observable<Message[]> {
      return this.http.get<Message[]>(this.baseUrl + '/commonData/systemmessages');
   }
 }

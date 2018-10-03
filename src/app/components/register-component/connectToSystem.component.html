@@ -1,36 +1,76 @@
+<div style="margin-left: 15%; margin-right: 15%">
+  <h1 style="color: white; font-size: -webkit-xxx-large; margin-top: 6%; margin-bottom: 6%; margin-left: 34%">JOIN US! EARN MORE!</h1>
 <div class="ui-g ui-fluid">
-    <div class="ui-g-12 ui-md-4">
-      <div class="ui-inputgroup">
-        <span class="ui-inputgroup-addon">Name</span>
-        <input type="text" pInputText id="firstNameId" placeholder="{{'Name' | translate}}" [(ngModel)]="_newPartner.name">
-      </div>
-      <div class="ui-inputgroup">
-        <span class="ui-inputgroup-addon"><i class="fa fa-mobile"></i></span>
-        <input type="text" pInputText id="telephoneId" placeholder="{{'Telephone' | translate}}" [(ngModel)]="_newPartner.telephone"
-               field="_newClient.telephone"/>
-      </div>
-      <div class="ui-inputgroup">
-        <span class="ui-inputgroup-addon"><i class="fa fa-user"></i></span>
-        <input type="text" pInputText id="usernameId" [(ngModel)]="_newPartner.username" placeholder="{{'Username' | translate}}"
-               field="_newClient.telephone"/>
-      </div>
-      <div class="ui-inputgroup">
-        <span class="ui-inputgroup-addon"><i class="fa fa-key"></i></span>
-        <input type="password" pInputText id="passwordId" [(ngModel)]="_newPartner.password" placeholder="{{'Password' | translate}}"
-               field="_newClient.password"/>
-      </div>
-      <div class="ui-inputgroup">
-        <span class="ui-inputgroup-addon"><i class="fa fa-briefcase"></i></span>
-        <p-dropdown [options]="servicesAsSelectItems" [(ngModel)]="selectedService" [style]="{'width':'100%'}"
-                    placeholder="{{'selectyourservice' | translate}}"></p-dropdown>
-      </div>
-      <div class="ui-inputgroup">
-        <label>Are you reservable ?</label><br/>
-        <p-inputSwitch onLabel="Yes" offLabel="No" [(ngModel)]="_newPartner.reservable"></p-inputSwitch>
-      </div>
-      <div>
-        <button pButton type="button" label="{{'Sign Up' | translate}}"  class="ui-button-secondary" (click)="register()"></button>
-      </div>
+  <div class="ui-g-12 ui-md-6">
+    <div class="ui-inputgroup">
+      <span class="ui-inputgroup-addon">Name</span>
+      <input type="text" pInputText id="firstNameId" placeholder="{{'Name' | translate}}" [(ngModel)]="_newPartner.name"
+             class="register-input">
     </div>
+  </div>
+
+  <div class="ui-g-12 ui-md-6">
+    <div class="ui-inputgroup">
+      <span class="ui-inputgroup-addon"><i class="fa fa-mobile"></i></span>
+      <input pInputText id="telephoneId" placeholder="{{'Telephone' | translate}}" [(ngModel)]="_newPartner.telephone"
+             class="register-input"/>
+    </div>
+  </div>
 </div>
+
+<div class="ui-g ui-fluid">
+  <div class="ui-g-12 ui-md-6">
+    <div class="ui-inputgroup">
+      <span class="ui-inputgroup-addon"><i class="fa fa-user"></i></span>
+      <input type="text" pInputText id="usernameId" [(ngModel)]="_newPartner.username" placeholder="{{'Username' | translate}}"
+             class="register-input"/>
+    </div>
+  </div>
+  <div class="ui-g-12 ui-md-6">
+    <div class="ui-inputgroup">
+      <span class="ui-inputgroup-addon"><i class="fa fa-key"></i></span>
+      <input type="password" pInputText id="passwordId" [(ngModel)]="_newPartner.password" placeholder="{{'Password' | translate}}"
+             class="register-input"/>
+    </div>
+  </div>
+</div>
+
+<div class="ui-g ui-fluid">
+  <div class="ui-g-12 ui-md-6">
+    <div class="ui-inputgroup">
+      <span class="ui-inputgroup-addon"><i class="fa fa-briefcase"></i></span>
+      <p-dropdown [options]="servicesAsSelectItems" [(ngModel)]="selectedService" [style]="{'width':'100%','height':'43px'}"
+                  placeholder="{{'selectyourservice' | translate}}"
+                  ></p-dropdown>
+    </div>
+  </div>
+  <div class="ui-g-12 ui-md-6">
+    <div class="ui-inputgroup">
+      <label>Are you reservable ?</label><br/>
+      <p-inputSwitch onLabel="Yes" offLabel="No" [(ngModel)]="_newPartner.reservable"></p-inputSwitch>
+    </div>
+  </div>
+</div>
+
+  <div class="ui-g ui-fluid">
+      <div class="ui-g-12 ui-md-6">
+        <div class="ui-inputgroup">
+          <span class="ui-inputgroup-addon">Start of work</span>
+          <p-calendar [(ngModel)]="_newPartner.workingStartDate" [timeOnly]="true" [showIcon]="false"></p-calendar>
+        </div>
+      </div>
+      <div class="ui-g-12 ui-md-6">
+        <div class="ui-inputgroup">
+          <span class="ui-inputgroup-addon">End of work</span>
+          <p-calendar [(ngModel)]="_newPartner.workingEndDate" [timeOnly]="true" [showIcon]="false"></p-calendar>
+        </div>
+      </div>
+      <div class="ui-g-12 ui-md-12">
+        <button pButton type="button" label="{{'Sign Up' | translate}}"  class="ui-button-secondary" (click)="register()" style="color: white"></button>
+      </div>
+  </div>
+
+</div>
+<p-growl [(value)]="msgs"></p-growl>
+
 

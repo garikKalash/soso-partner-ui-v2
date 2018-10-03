@@ -1,12 +1,18 @@
-<div id="header" class="soso-header">
-  <div style="display: inline-block; float: left;">
-    <p style="font-size: x-large; font-family: 'Bell MT'">
-      SOSO partner
-    <p>
+<div id="header" class="ui-g soso-header">
+  <div class="ui-g-12 ui-md-4">
+    <img src="../../../assets/soso-partner-logo.png" style="margin-left: 25%; width: 30%;height: 100%;"/>
   </div>
-  <div style="display: inline-block"></div>
-  <div class="soso-languages-block" style="display: inline-block; float: right;">
-      <p-dropdown [options]="supportedLanguages"  [style]="{'width':'90px'}" [(ngModel)] = "selectedLang" (onChange)="selectLanguage()">
+  <div class="ui-g-12 ui-md-7">
+    <div style="float: right; margin-right: 6%;  margin-top: 1%;" *ngIf="isLoggedIn$ | async">
+      <i class="pi pi-globe" style="font-size: 3em; color: #484848"></i>
+      <i class="pi pi-user" style="font-size: 3em; color: #484848" (click)="router.navigate(['/partneraccount/' + partnerId])"></i>
+      <i class="pi pi-th-large" aria-hidden="true" style="font-size: 3em; color: #484848" (click)="router.navigate(['/partneraccount/' + partnerId + '/workspace'])"></i>
+      <i class="pi pi-power-off" style="font-size: 3em; color: #484848" (click)="authService.logout()"></i>
+    </div>
+  </div>
+  <div class="ui-g-12 ui-md-1">
+    <div style="margin-top: 11%;">
+      <p-dropdown [options]="i18nService.supportedLanguages"  [style]="{'width':'90px'}" [(ngModel)] = "i18nService.selectedLang" (onChange)="selectLanguage()">
         <ng-template let-lang pTemplate="item">
           <div class="ui-helper-clearfix" style="position: relative;height: 25px;">
             <img src="{{lang?.flagpath}}" style="width:24px;position:absolute;top:1px;left:5px"/>
@@ -14,9 +20,8 @@
           </div>
         </ng-template>
       </p-dropdown>
+    </div>
   </div>
 </div>
-<div>
-<app-wlc-page></app-wlc-page>
-</div>
 
+<router-outlet></router-outlet>

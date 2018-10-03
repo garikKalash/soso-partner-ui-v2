@@ -1,8 +1,14 @@
-<div id="login-block" style="padding-top: 20%; min-height: 100%; max-height: 100%; height: 100vh">
-<app-login></app-login>
-  <a href="#register-block">Go to register</a>
+<div id="login-block" style="padding-top: 10%; min-height: 100%; max-height: 100%; height: 100vh; background-color: #a0a0a0">
+  <div class="ui-g-12">
+    <div class="ui-g-12 ui-md-6">
+      <img src="../../../assets/soso-partner-wlc-page.png" />
+    </div>
+    <div class="ui-g-12 ui-md-6">
+      <app-login></app-login>
+    </div>
+  </div>
 </div>
-<div id="register-block" style="padding-top: 20%; min-height: 100%; max-height: 100%; height: 100vh">
-  <a href="#top">Go to login</a>
+<div id="register-block" style="padding-top: 10%; min-height: 100%; max-height: 100%; height: 100vh; background-color: lightgray">
+  <button onclick=" window.scrollTo(0, 0);" style="border-radius: 100%; height: 75px; width: 75px; float: right"><i class="pi pi-chevron-up"></i></button>
   <app-register-component></app-register-component>
 </div>

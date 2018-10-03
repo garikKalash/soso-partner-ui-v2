@@ -2,6 +2,7 @@ import {Feedback} from './feedback.model';
 import {Client} from './client.model';
 import {PartnerServiceDetail} from './partner-service-detail.model';
 import {Photo} from './photo.model';
+import {PartnerService} from '../service/partner.service';
 /**
  * Created by Home on 3/4/2017.
  */
@@ -24,7 +25,24 @@ export class Partner {
   private _imgId: number;
   private _reservable: boolean;
   private _services: PartnerServiceDetail[] = [];
+  private _workingStartDate: Date;
+  private _workingEndDate: Date;
 
+  get workingStartDate(): Date {
+    return this._workingStartDate;
+  }
+
+  set workingStartDate(value: Date) {
+    this._workingStartDate = value;
+  }
+
+  get workingEndDate(): Date {
+    return this._workingEndDate;
+  }
+
+  set workingEndDate(value: Date) {
+    this._workingEndDate = value;
+  }
 
   get reservable(): boolean {
     return this._reservable;

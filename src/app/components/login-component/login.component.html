@@ -1,14 +1,17 @@
-<div>
-  <div *ngIf="wrongWrotenData"><p translate>invalidpasswordorphone</p></div>
+<div style="margin-left:60%; margin-top: 20%">
   <div class="ui-inputgroup">
     <span class="ui-inputgroup-addon"><i class="fas fa-mobile-alt"></i></span>
     <input type="text" pInputText [(ngModel)]="partner.telephone" placeholder="{{'Telephone' | translate}}">
   </div>
+  <br/>
   <div class="ui-inputgroup">
     <span class="ui-inputgroup-addon"><i class="fas fa-key"></i></span>
     <input type="password" pPassword [(ngModel)]="partner.password" placeholder="{{'Password' | translate}}"/>
   </div>
-  <div>
+  <br/>
+  <div class="ui-buttonset">
     <button pButton type="button" label="{{'Sign In' | translate}}"  class="ui-button-secondary" (click)="signin()"></button>
+    <button onclick=" window.scrollTo(0, document.body.scrollHeight / 2);">{{'Sign Up' | translate}}</button>
   </div>
 </div>
+<p-growl [(value)]="msgs"></p-growl>

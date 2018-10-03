@@ -1,5 +1,6 @@
-import {PartnerServiceDetail} from './partner-service-detail.model';
 import {Client} from './client.model';
+import {PartnerServiceDetail} from './partner-service-detail.model';
+
 export class Request {
   private _id: number;
 
@@ -16,6 +17,8 @@ export class Request {
   private _newRequestStartTime: Date;
   private _serviceId: number;
   private _partnerServiceDetail: PartnerServiceDetail;
+
+  private _isSaved = false;
 
 
 
@@ -142,13 +145,13 @@ export class Request {
   set responseText(value: string) {
     this._responseText = value;
   }
-  public  toJsonString(): string {
-    let json = JSON.stringify(this);
-    Object.keys(this).filter(key => key[0] === '_').forEach(key => {
-      json = json.replace(key, key.substring(1));
-    });
 
-    return json;
+
+  get isSaved(): boolean {
+    return this._isSaved;
   }
 
+  set isSaved(value: boolean) {
+    this._isSaved = value;
+  }
 }

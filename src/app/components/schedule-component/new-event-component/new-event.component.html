@@ -1,0 +1,27 @@
+<h1 mat-dialog-title>New request</h1>
+
+<div mat-dialog-content>
+  <p>{{selfRequest.startTime | date: 'MMM-dd-yy, HH:mm'}}</p>
+  <div>
+    <p-calendar [(ngModel)]="copyOfStartTime" [timeOnly]="true" [showIcon]="true" [icon]="'fa fa-play'"></p-calendar>
+  </div>
+  <br/>
+  <br/>
+  <br/>
+  <br/>
+  <mat-divider></mat-divider>
+  <br/>
+  <div class="ui-inputgroup">
+      <span class="ui-inputgroup-addon"><i class="fa fa-clock" aria-hidden="true"></i></span>
+      <input type="number" pInputText placeholder="{{'Duration' | translate}}" [(ngModel)]="selfRequest.duration">
+  </div>
+</div>
+<br/>
+<br/>
+<br/>
+<br/>
+<div mat-dialog-actions>
+  <button mat-button (click)="onCancelClick()">No Thanks</button>
+  <button mat-button (click)="saveRequest()">Ok</button>
+</div>
+<p-growl [(value)]="msgs"></p-growl>

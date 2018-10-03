@@ -1,14 +1,11 @@
 import {TranslateLoader} from '@ngx-translate/core';
-import {Observable, of} from 'rxjs';
-import {HttpClient} from '@angular/common/http';
-import {Message} from './models/message.model';
-import {environment} from '../environments/environment';
-import {MessageService} from './service/message.service';
+import {Observable} from 'rxjs';
+import {SysMessageService} from './service/sys-message.service';
 import {map} from 'rxjs/operators';
 
 export class CustomLoader implements TranslateLoader {
 
-  constructor(private messageService: MessageService) {
+  constructor(private sysMessageService: SysMessageService) {
 
   }
 
@@ -22,7 +19,7 @@ export class CustomLoader implements TranslateLoader {
 
 
   getHay(): Observable<any> {
-  return  this.messageService.getAllMessages().pipe(map(value => {
+  return  this.sysMessageService.getAllSysMessages().pipe(map(value => {
       const obj = {};
       value.forEach(value1 => {
         obj[value1.globkey] = value1.hay;
@@ -32,7 +29,7 @@ export class CustomLoader implements TranslateLoader {
   }
 
   getEng(): Observable<any> {
-    return  this.messageService.getAllMessages().pipe(map(value => {
+    return  this.sysMessageService.getAllSysMessages().pipe(map(value => {
       const obj = {};
       value.forEach(value1 => {
         obj[value1.globkey] = value1.eng;

@@ -1,7 +1,13 @@
 import {Component, OnInit} from '@angular/core';
 import {TranslateService} from '@ngx-translate/core';
-import {MessageService} from './service/message.service';
+import {SysMessageService} from './service/sys-message.service';
 import {PartnerService} from './service/partner.service';
+import {HttpHeaders} from '@angular/common/http';
+import {UtilMethods} from './util/UtilMethods';
+import {I18nService} from './service/i18n.service';
+import {AuthenticationService} from './service/authentication.service';
+import {Router} from '@angular/router';
+import {Observable} from 'rxjs';
 
 @Component({
   selector: 'app-root',
@@ -9,43 +15,31 @@ import {PartnerService} from './service/partner.service';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent implements OnInit {
-  public supportedLanguages: any[];
-  public selectedLang: string;
+  isLoggedIn$: Observable<boolean>;
+  partnerId: number;
 
-
-  constructor(private translateService: TranslateService) {
-    this.translateService.addLangs(Array.of('hay', 'eng'));
-    this.translateService.setDefaultLang('hay');
-    PartnerService.headers.set('Accept-Language', 'hay');
+  constructor(public i18nService: I18nService,
+              public authService: AuthenticationService,
+              public router: Router) {
   }
 
-  ngOnInit(): void {
-      // standing datad
-      this.supportedLanguages = [
-        { display: 'Հայերեն', value: 'hay', flagpath: 'http://flagpedia.net/data/flags/mini/am.png', label: 'Հայ' },
-        { display: 'English', value: 'eng', flagpath: 'http://flagpedia.net/data/flags/mini/gb.png', label: 'Eng' },
-      ];
-
-
-      this.selectedLang = this.supportedLanguages[0].value;
-      this.selectLang(this.selectedLang);
-
-    }
+   ngOnInit(): void {
+     this.isLoggedIn$ = this.authService.isLoggedIn;
+     this.authService.getLoggedPartnerId.subscribe(value => {
+       this.partnerId = value;
+     });
+     this.authService.checkLoggedInUser();
+   }
 
     isCurrentLang(lang: string) {
-      return lang === this.translateService.currentLang;
+      return this.i18nService.isCurrentLang(lang);
     }
 
     selectLanguage() {
-      this.selectLang(this.selectedLang);
+      this.i18nService.selectLanguage();
     }
 
-    selectLang(lang: string) {
-      // set default;
-      this.translateService.use(lang);
-      PartnerService.headers.set('Accept-Language', lang);
 
-    }
 
 
 }

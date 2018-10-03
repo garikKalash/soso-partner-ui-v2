@@ -19,4 +19,8 @@ export class CommonDataService {
   public getServicesByParent(parentId: number): Observable<Service[]> {
     return this.http.get<Service[]>(this.baseUrl + 'commonData/getSosoServices/' + parentId);
   }
+
+  public getServiceById(serviceId: number): Observable<Service> {
+    return this.http.get<Service>(this.baseUrl + 'commonData/service/' + serviceId)
+  }
 }

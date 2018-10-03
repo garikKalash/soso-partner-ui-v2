@@ -1,10 +1,184 @@
-<div>{{partner.name}}</div>
-<img src="{{partner.imgpath}}"/>
-<div>
-  <p>{{'username' | translate}}<p>: {{partner.username}}
-  <p>{{'signout' | translate}}</p>
-  <p translate>Name</p>: {{partner.name}}
-  Telephone: {{partner.telephone}}
-  Address: {{partner.address}}
-  Service: {{partner.serviceName}}
+<div *ngIf="!partner.serviceName">
+      <div style="position:absolute;top:35%;left:45%">
+        <img style="position: absolute" src="../../../assets/soso-partner-logo.png"/>
+      </div>
 </div>
+<div style="margin-left: 5%; margin-right: 5%; padding-top: 7%" *ngIf="partner.serviceName">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-1 col-lg-2"></div>
+          <div class="col-md-10 col-lg-8">
+            <div class="intro">
+              <div class="profile-img">
+                <img src="{{partner.imgpath}}" alt=""/>
+                <div class="hover-on-partner-image-content">
+                  <p-fileUpload #accountImageForm mode="basic" name="file[]"
+                                [customUpload]="true"
+                                auto="true"
+                                (onBeforeUpload)="onBeforeSend($event)"
+                                (uploadHandler)="accountImageUploader($event, accountImageForm)"
+                                accept="image/*"
+                                maxFileSize="1000000"></p-fileUpload>
+                </div>
+              </div>
+              <h2><b>{{partner.name}}</b></h2>
+              <h4 class="font-yellow">{{partner.serviceName}}</h4>
+              <ul class="information margin-tb-30">
+                <li><b>{{'Telephone' | translate}} : </b>{{partner.telephone}}</li>
+                <li><b>{{'Username' | translate}} : </b>{{partner.username}}</li>
+                <li><b>{{'Address' | translate}} : </b>{{partner.address}}<i class="pi pi-external-link" (click)="openDialog()"></i> </li>
+              </ul>
+            </div><!-- intro -->
+          </div><!-- col-sm-8 -->
+        </div><!-- row -->
+      </div>
+      <mat-tab-group style="margin-top: 3%">
+        <mat-tab label="{{'services' | translate}}">
+          <form [formGroup]="newServiceForm">
+            <div class="ui-g ui-fluid" style="height: 100px; margin-top: 2%;">
+              <div class="ui-g-12 ui-md-4">
+                <div class="ui-inputgroup">
+                  <span class="ui-inputgroup-addon"><i class="fa fa-briefcase"></i></span>
+                  <p-dropdown [options]="selectItemsForNewService" [(ngModel)]="newServiceToPartner" formControlName="service"
+                              placeholder="{{'selectyourservice' | translate}}"></p-dropdown>
+                  <p-message severity="error" *ngIf="!newServiceForm.controls['service'].valid&&newServiceForm.controls['service'].dirty"></p-message>
+                </div>
+              </div>
+              <div class="ui-g-12 ui-md-4">
+                <div class="ui-inputgroup">
+                  <span class="ui-inputgroup-addon">֏</span>
+                  <input type="number" pInputText placeholder="{{'Price' | translate}}" [(ngModel)]="newServiceToPartner.price" formControlName="price" required>
+                  <p-message severity="error" *ngIf="!newServiceForm.controls['price'].valid&&newServiceForm.controls['price'].dirty"></p-message>
+                </div>
+              </div>
+
+              <div class="ui-g-12 ui-md-4">
+                <div class="ui-inputgroup">
+                  <span class="ui-inputgroup-addon"><i class="fa fa-clock" aria-hidden="true"></i></span>
+                  <input type="number" pInputText placeholder="{{'Duration' | translate}}" [(ngModel)]="newServiceToPartner.defaultduration" formControlName="defaultduration" required>
+                  <p-message severity="error" *ngIf="!newServiceForm.controls['defaultduration'].valid&&newServiceForm.controls['defaultduration'].dirty"></p-message>
+                </div>
+              </div>
+              <div class="ui-g-12 ui-md-12">
+                <button pButton type="button" label="Add new service" class="ui-button-secondary" (click)="addNewServiceToPartner()" [disabled]="!newServiceForm.valid"></button>
+              </div>
+            </div>
+          </form>
+          <mat-divider></mat-divider>
+          <div style="margin-top: 3%">
+            <p-table [value]="partner.services">
+              <ng-template pTemplate="header">
+                <tr>
+                  <th>{{'Service' | translate}}</th>
+                  <th>{{'Duration' | translate}}</th>
+                  <th>{{'price' | translate}}</th>
+                  <th style="width: 45px"></th>
+                </tr>
+              </ng-template>
+              <ng-template pTemplate="body" let-rowData>
+                <tr>
+                  <td pEditableColumn>
+                    <p-cellEditor>
+                      <ng-template pTemplate="input">
+                        <input type="text" [(ngModel)]="rowData.translatedName" disabled>
+                      </ng-template>
+                      <ng-template pTemplate="output">
+                        {{rowData.translatedName}}
+                      </ng-template>
+                    </p-cellEditor>
+                  </td>
+                  <td pEditableColumn>
+                    <p-cellEditor>
+                      <ng-template pTemplate="input">
+                        <input type="text" [(ngModel)]="rowData.defaultduration" required="required">
+                      </ng-template>
+                      <ng-template pTemplate="output">
+                        {{rowData.defaultduration}}
+                      </ng-template>
+                    </p-cellEditor>
+                  </td>
+                  <td pEditableColumn>
+                    <p-cellEditor>
+                      <ng-template pTemplate="input">
+                        <input type="text" [(ngModel)]="rowData.price" required="required">
+                      </ng-template>
+                      <ng-template pTemplate="output">
+                        {{rowData.price}}
+                      </ng-template>
+                    </p-cellEditor>
+                  </td>
+                  <td pEditableColumn style="width: 20px">
+                    <p-cellEditor>
+                      <ng-template pTemplate="input">
+                        <span  (click)="deletePartnerServiceDetail(rowData)"><i class="fa fa-trash" aria-hidden="true"></i></span>
+                        <span (click)="updatePartnerServiceDetail(rowData)"><i class="pi pi-upload" (onclick)="updatePartnerServiceDetail(rowData)"></i></span>
+                      </ng-template>
+                      <ng-template pTemplate="output">
+                        <i class="fa fa-bars" aria-hidden="true"></i>
+                      </ng-template>
+                    </p-cellEditor>
+                  </td>
+                </tr>
+              </ng-template>
+            </p-table>
+          </div>
+
+        </mat-tab>
+        <mat-tab label="{{'Feedbacks' | translate}}  ({{partner.feedbacks?.length}})">
+          <p-dataScroller [value]="partner.feedbacks" [rows]="10" [inline]="true" scrollHeight="500px">
+            <ng-template let-feedback pTemplate="item" let-i="index">
+              <div class="ui-g feedback-item" style="border-bottom: 1px solid darkgrey">
+                <div class="ui-g-12 ui-md-3">
+                  <div class="ui-g">
+                    <div class="ui-g-6">
+                        <p style="font-size: xx-large; font-style: oblique;">{{feedback.rate}}</p>
+                    </div>
+                  </div>
+                  <div class="ui-g">
+                    <div class="ui-g-6">
+                      <p-rating [ngModel]="feedback.rate" [readonly]="true"  [cancel]="false">
+                      </p-rating>
+                    </div>
+                  </div>
+                </div>
+                <div class="ui-g-12 ui-md-9">
+                  <div class="ui-g">
+                    <div class="ui-g-10 ui-sm-6">{{feedback.context}}</div>
+                  </div>
+                </div>
+              </div>
+            </ng-template>
+          </p-dataScroller>
+        </mat-tab>
+        <mat-tab label="{{'Images' | translate}}">
+          <p-blockUI [target]="pnl" [blocked]="fileUploadBLocked">
+            <div style="position:absolute;top:25%;left:50%">
+            <p-progressSpinner></p-progressSpinner>
+            </div>
+          </p-blockUI>
+          <p-panel #pnl>
+            <p-fileUpload #form mode="basic" name="file[]"
+                        [customUpload]="true"
+                        (onBeforeUpload)="onBeforeSend($event)"
+                        (onClear)="fileUploadBLocked =false"
+                        (onError)="fileUploadBLocked = false"
+                        (uploadHandler)="imageUploader($event, form)"
+                        accept="image/*"
+                        maxFileSize="1000000"></p-fileUpload>
+          <div class="p-grid p-align-center">
+            <div *ngFor="let image of partner.photoDtos" class="p-col-4 p-md-2 hover-on-partner-image">
+                <img src="{{image.image_path}}"
+                         style="width: 100%"/>
+                <div class="hover-on-partner-image-content" (onclick)="deletePartnerPhoto(image.id)">
+                  <button pButton type="button" label="{{'deletebtn' | translate}}"  class="ui-button-secondary" (click)="deletePartnerPhoto(image.id)"></button>
+                </div>
+            </div>
+          </div>
+          </p-panel>
+        </mat-tab>
+        <mat-tab label="{{'Notices' | translate}}">
+          <p-editor [(ngModel)]="partner.notices" [style]="{'height':'320px'}"></p-editor>
+        </mat-tab>
+      </mat-tab-group>
+    </div>
+<router-outlet></router-outlet>

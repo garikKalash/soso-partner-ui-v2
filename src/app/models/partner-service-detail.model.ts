@@ -1,5 +1,6 @@
-
 import {Service} from './service.model';
+
+
 export class PartnerServiceDetail {
   private _id: number;
   private _serviceId: number;
@@ -7,6 +8,7 @@ export class PartnerServiceDetail {
   private _partnerId: number;
   private _defaultduration: number;
   private _price: number;
+  private _translatedName: string;
   private _isEditing = false;
 
   constructor(id: number, serviceId: number, partnerId: number, defaaultduration: number, price: number) {
@@ -74,6 +76,15 @@ export class PartnerServiceDetail {
 
   set price(value: number) {
     this._price = value;
+  }
+
+
+  get translatedName(): string {
+    return this._translatedName;
+  }
+
+  set translatedName(value: string) {
+    this._translatedName = value;
   }
 
   public  toJsonString(): string {
