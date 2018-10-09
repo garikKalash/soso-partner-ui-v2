@@ -5,7 +5,7 @@ import {Client} from '../models/client.model';
 
 @Injectable()
 export class ClientService {
-  baseUrl = environment.clientServiceBaseUrl;
+  baseUrl = environment.sosoServiceUrl;
 
   constructor(private http: HttpClient) {
 

@@ -4,9 +4,7 @@
 
 export const environment = {
   production: false,
-  partnerServiceBaseUrl: 'http://localhost:8081/',
-  clientServiceBaseUrl: 'http://localhost:8080/',
-  commonServiceBaseUrl: 'http://localhost:8001/',
+  sosoServiceUrl: 'http://localhost:8081/',
 };
 
 /*

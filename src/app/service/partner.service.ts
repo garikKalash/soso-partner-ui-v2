@@ -15,7 +15,7 @@ export class PartnerService {
 
   public static headers: HttpHeaders = new HttpHeaders({'Content-Type': 'application/json'});
 
-  baseUrl = environment.partnerServiceBaseUrl;
+  baseUrl = environment.sosoServiceUrl;
 
   constructor(private http: HttpClient,
               private i18Service: I18nService) {

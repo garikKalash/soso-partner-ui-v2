@@ -7,7 +7,7 @@ import {Service} from '../models/service.model';
 @Injectable()
 export class CommonDataService {
 
-  baseUrl: string = environment.commonServiceBaseUrl;
+  baseUrl: string = environment.sosoServiceUrl;
 
   constructor(private http: HttpClient) {
   }

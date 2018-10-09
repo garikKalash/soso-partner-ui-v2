@@ -6,12 +6,12 @@ import {Observable} from 'rxjs';
 
 @Injectable()
 export class SysMessageService {
-  baseUrl = environment.commonServiceBaseUrl;
+  baseUrl = environment.sosoServiceUrl;
 
   constructor(private http: HttpClient) {
   }
 
   public getAllSysMessages(): Observable<Message[]> {
-     return this.http.get<Message[]>(this.baseUrl + '/commonData/systemmessages');
+     return this.http.get<Message[]>(this.baseUrl + 'commonData/systemmessages');
   }
 }
